@@ -1,0 +1,10 @@
+<view class="loading-container {{show ? 'visible' : 'hidden'}}">
+  <view class="loading-mask"></view>
+  <view class="loading-content">
+    <text class="loading-text">{{text}}</text>
+    <view class="loading-progress">
+      <view class="progress-bar" style="width: {{progress}}%"></view>
+    </view>
+    <text class="progress-text">{{progress}}%</text>
+  </view>
+</view>

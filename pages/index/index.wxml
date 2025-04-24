@@ -1,36 +1,54 @@
-<view class="container main">
-    <!-- 顶部标题 -->
-    <view class="header">
-        <text class="title">AI教育助手</text>
-        <text class="subtitle">助力教学与学习的智能工具</text>
-    </view>
+<view class="page-container">
+  <!-- 顶部标题 -->
+  <view class="header">
+    <text class="title">AI教育助手</text>
+    <text class="subtitle">助力教学与学习的智能工具</text>
+  </view>
 
-    <!-- 分类标签 -->
-    <view class="tabs">
-        <view class="tab {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">智慧课堂</view>
-        <view class="tab {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">百科大全</view>
-        <view class="tab {{activeTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">创意工坊</view>
-        <view class="tab {{activeTab === 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">心灵成长</view>
+  <!-- 推荐区域 -->
+  <view class="recommend-section" wx:if="{{featuredTool}}">
+    <view class="section-title">推荐给你</view>
+    
+    <view class="card featured-card" bindtap="navigateToTool" data-tool="{{featuredTool.id}}">
+      <view class="card-tag">Our Pick</view>
+      <view class="card-title">{{featuredTool.title}}</view>
+      <view class="card-desc">{{featuredTool.description}}</view>
+      <view class="card-category">{{featuredTool.categoryName}}</view>
+    </view>
+  </view>
+
+  <!-- 分类导航 -->
+  <view class="category-nav">
+    <block wx:for="{{categoryList}}" wx:key="id">
+      <view class="category-item {{activeCategory === item.id ? 'active' : ''}}" 
+            bindtap="switchCategory" data-category="{{item.id}}">
+        {{item.name}}
+      </view>
+    </block>
+  </view>
+
+  <!-- 工具列表 -->
+  <view class="tools-section">
+    <view class="tools-title">所有工具</view>
+    
+    <!-- 空状态提示 -->
+    <view class="empty-state" wx:if="{{filteredTools.length === 0}}">
+      <text>当前分类下暂无工具</text>
     </view>
     
-    <!-- 工具列表 -->
-    <swiper class="swiper" current="{{activeTab}}" bindchange="swiperChange" style="height: 850rpx;">
-        <swiper-item wx:for="{{categories}}" wx:key="id">
-            <scroll-view scroll-y class="scroll-view">
-                <view class="card-list">
-                    <view wx:for="{{item.tools}}" wx:key="id" wx:for-item="tool" bindtap="navigateToTool" data-tool="{{tool.id}}">
-                        <mcontent type="block" class="tool-card">
-                            <view class="card-inner">
-                                <view class="card-title">{{tool.title}}</view>
-                                <view class="card-desc">{{tool.description}}</view>
-                            </view>
-                        </mcontent>
-                    </view>
-                </view>
-            </scroll-view>
-        </swiper-item>
-    </swiper>
+    <!-- 工具卡片列表 -->
+    <view class="tools-grid">
+      <block wx:for="{{filteredTools}}" wx:key="id">
+        <view class="tool-card" bindtap="navigateToTool" data-tool="{{item.id}}">
+          <view class="card-tag" wx:if="{{item.featured}}">Our Pick</view>
+          <view class="card-title">{{item.title}}</view>
+          <view class="card-desc">{{item.description}}</view>
+          <view class="card-category">{{item.categoryName}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
 
-    <!-- 隐藏的AI组件，用于处理对话 -->
-    <ai-group id="aiGroup" bindupdatechat="updateChat" style="display:none;"></ai-group>
+  <!-- 隐藏的AI组件，用于处理对话 -->
+  <ai-group id="aiGroup" bindupdatechat="updateChat" style="display:none;"></ai-group>
 </view>

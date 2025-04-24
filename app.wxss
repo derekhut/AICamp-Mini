@@ -1,4 +1,22 @@
 /**app.wxss**/
+/* 全局样式变量 */
+page {
+  --primary-color: #3e9cfe;
+  --primary-light: rgba(62, 156, 254, 0.1);
+  --accent-color: #ff6b6b;
+  --text-color: #333;
+  --text-secondary: #666;
+  --bg-color: #f7f7f7;
+  --card-bg: #ffffff;
+  --border-color: #eee;
+  --border-radius: 12rpx;
+  --shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  --spacing-xs: 10rpx;
+  --spacing-sm: 20rpx;
+  --spacing-md: 30rpx;
+  --spacing-lg: 40rpx;
+}
+
 .container {
   height: 100%;
   display: flex;
