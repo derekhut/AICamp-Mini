@@ -1,0 +1,88 @@
+<!--pages/tools/concept/concept.wxml-->
+<view class="tool-container">
+  <view class="tool-header">
+    <text class="tool-title">{{toolInfo.title}}</text>
+    <text class="tool-description">{{toolInfo.description}}</text>
+  </view>
+  
+  <form bindsubmit="submitForm" class="tool-form">
+    <!-- 动态参数表单 -->
+    <view class="form-item" wx:for="{{toolInfo.params}}" wx:key="id">
+      <text class="form-label">{{item.label}}{{item.required ? ' *' : ''}}</text>
+      
+      <!-- 文本输入 -->
+      <block wx:if="{{item.type === 'text'}}">
+        <input 
+          class="form-input" 
+          name="{{item.id}}" 
+          placeholder="{{item.placeholder || '请输入'}}"
+          value="{{formData[item.id]}}"
+        />
+      </block>
+      
+      <!-- 文本区域 -->
+      <block wx:elif="{{item.type === 'textarea'}}">
+        <textarea 
+          class="form-textarea" 
+          name="{{item.id}}" 
+          placeholder="{{item.placeholder || '请输入'}}"
+          value="{{formData[item.id]}}"
+          auto-height
+          style="min-height: 150rpx;"
+        />
+      </block>
+      
+      <!-- 下拉选择 -->
+      <block wx:elif="{{item.type === 'select'}}">
+        <picker 
+          class="form-picker" 
+          name="{{item.id}}" 
+          mode="selector" 
+          range="{{item.optionsLabels}}"
+          value="{{pickerIndexes[item.id] || 0}}"
+          bindchange="pickerChange" 
+          data-field="{{item.id}}"
+        >
+          <view class="picker-text">
+            {{formData[item.id] ? formData[item.id] : (item.placeholder || '请选择')}}
+          </view>
+        </picker>
+      </block>
+      
+      <!-- 单选 -->
+      <block wx:elif="{{item.type === 'radio'}}">
+        <radio-group 
+          class="form-radio-group" 
+          name="{{item.id}}" 
+          bindchange="radioChange" 
+          data-field="{{item.id}}"
+        >
+          <label class="radio-label" wx:for="{{item.options}}" wx:key="value" wx:for-item="option">
+            <radio value="{{option.value}}" checked="{{formData[item.id] === option.value}}"/>
+            <text class="radio-text">{{option.label}}</text>
+          </label>
+        </radio-group>
+      </block>
+      
+      <!-- 帮助文本 -->
+      <text class="form-help" wx:if="{{item.helpText}}">{{item.helpText}}</text>
+    </view>
+    
+    <button form-type="submit" class="submit-button">开始生成</button>
+  </form>
+  
+  <!-- 结果展示 -->
+  <view class="result-container" wx:if="{{result}}">
+    <view class="result-header">
+      <text class="result-title">生成结果</text>
+    </view>
+    <view class="result-content">{{result}}</view>
+    <view class="result-actions">
+      <button bindtap="copyResult" class="action-button">复制</button>
+      <button open-type="share" class="action-button">分享</button>
+    </view>
+  </view>
+  
+  <!-- AI组件（隐藏，仅用于处理AI请求） -->
+  <ai-group id="aiGroup" bindupdatechat="handleAIResponse" style="display:none;"></ai-group>
+</view>

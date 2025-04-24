@@ -1,0 +1,126 @@
+/* index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 10rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+  color: #666;
+  border-radius: 8rpx;
+  transition: all 0.3s;
+}
+
+.tab.active {
+  background-color: #83e353;
+  color: #fff;
+  font-weight: bold;
+}
+
+.swiper {
+  flex: 1;
+  width: 100%;
+}
+
+.scroll-view {
+  height: 100%;
+  padding: 10rpx 0;
+}
+
+.card-list {
+  padding: 10rpx;
+}
+
+.tool-card {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.card-inner {
+  padding: 30rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.card-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}
+
+.tool-card:active {
+  transform: scale(0.98);
+  background-color: #f9f9f9;
+}
+
+/* 保留原有的聊天气泡样式，以便于ai-group组件使用 */
+.chat-bubble {
+  display: flex;
+  align-items: flex-start;
+  margin: 10rpx 0;
+}
+
+.left {
+  flex-direction: row;
+}
+
+.right {
+  flex-direction: row-reverse;
+}
+
+.main {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.ai-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

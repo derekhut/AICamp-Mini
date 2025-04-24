@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "ai-group": "/miniprogram_npm/edu-miniprogram-components/ai-group/ai-group",
+    "mcontent": "/miniprogram_npm/edu-miniprogram-components/multi-content/multi-content"
+  }
+}
